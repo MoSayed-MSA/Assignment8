@@ -1,6 +1,5 @@
 import noteModel from '../../db/models/note.model.js';
 
-// 1. Create a Single Note
 export const createNote = async (req, res, next) => {
     const { title, content } = req.body;
     const userId = req.user._id;
@@ -10,7 +9,6 @@ export const createNote = async (req, res, next) => {
     return res.status(201).json({ message: 'Note created' });
 };
 
-// 2. Update a single Note by its id
 export const updateNote = async (req, res, next) => {
     const { noteId } = req.params;
     const { title, content } = req.body;
@@ -37,7 +35,6 @@ export const updateNote = async (req, res, next) => {
     });
 };
 
-// 3. Replace the entire note document
 export const replaceNote = async (req, res, next) => {
     const { noteId } = req.params;
     const { title, content } = req.body;
@@ -61,7 +58,6 @@ export const replaceNote = async (req, res, next) => {
     return res.status(200).json(replacedNote);
 };
 
-// 4. Update the title of all notes created by the logged-in user
 export const updateAllNotesTitle = async (req, res, next) => {
     const { title } = req.body;
     const userId = req.user._id;
@@ -78,7 +74,6 @@ export const updateAllNotesTitle = async (req, res, next) => {
     return res.status(200).json({ message: 'All notes updated' });
 };
 
-// 5. Delete a single Note by its id
 export const deleteSingleNote = async (req, res, next) => {
     const { noteId } = req.params;
     const userId = req.user._id;
@@ -100,7 +95,6 @@ export const deleteSingleNote = async (req, res, next) => {
     });
 };
 
-// 6. Retrieve a paginated list of notes sorted by createdAt DESC
 export const getPaginatedNotes = async (req, res, next) => {
     let { page = 1, limit = 3 } = req.query;
     page = parseInt(page);
@@ -117,7 +111,6 @@ export const getPaginatedNotes = async (req, res, next) => {
     return res.status(200).json(notes);
 };
 
-// 7. Get a note by its id
 export const getNoteById = async (req, res, next) => {
     const { id } = req.params;
     const userId = req.user._id;
@@ -134,7 +127,6 @@ export const getNoteById = async (req, res, next) => {
     return res.status(200).json(note);
 };
 
-// 8. Get a note for logged-in user by its content
 export const getNoteByContent = async (req, res, next) => {
     const { content } = req.query;
     const userId = req.user._id;
@@ -151,7 +143,6 @@ export const getNoteByContent = async (req, res, next) => {
     return res.status(200).json(note);
 };
 
-// 9. Retrieves all notes for logged-in user with populated user email
 export const getNotesWithUser = async (req, res, next) => {
     const id = req.user._id;
 
@@ -166,7 +157,6 @@ export const getNotesWithUser = async (req, res, next) => {
     return res.status(200).json(notes);
 };
 
-// 10. Aggregation: Retrieve notes for logged-in user with user info (name, email) & optional title search
 export const aggregateNotes = async (req, res, next) => {
     const userId = req.user._id;
     const { title } = req.query;
@@ -206,7 +196,6 @@ export const aggregateNotes = async (req, res, next) => {
     return res.status(200).json(notes);
 };
 
-// 11. Delete all notes for the logged-in user
 export const deleteAllNotes = async (req, res, next) => {
     const userId = req.user._id;
 
